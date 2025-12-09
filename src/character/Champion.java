@@ -11,6 +11,7 @@ public abstract class Champion {
     private double criticalRate;
     private int defense;
 
+
     // 생성자
     public Champion(String name, int level, int hp, int attackDamage, int criticalRate, int defense )
     {
@@ -30,6 +31,12 @@ public abstract class Champion {
 
     public void basicAttack(Champion enemy)
     {
+        if (hp <= 0) {
+            System.out.println("캐릭터가 사망한 상태입니다.");
+            return;
+        }
+
+        System.out.println(name + "가 " + enemy.getName() + "에게 기본 공격!");
         Random rand = new Random();
         rand.setSeed(System.currentTimeMillis());
         int value = rand.nextInt(100);
@@ -57,10 +64,11 @@ public abstract class Champion {
         int trueDamage = Math.max(0, damage - defense);
         hp -= trueDamage;
 
-        System.out.println(enemyName + "가 " + myName + "에게 " + trueDamage + " 피해를 주었습니다.");
+        System.out.println(enemyName + "이(가) " + myName + "에게 " + trueDamage + " 피해를 주었습니다.");
 
         if (hp <= 0) {
             System.out.println(myName + " 사망!");
+            hp = 0;
         } else {
             System.out.println(myName + "의 체력이 " + hp + " 남았습니다.");
         }
@@ -69,7 +77,22 @@ public abstract class Champion {
 
     // 레벨업
 
-    public abstract void levelUp();
+    public void levelUp()
+    {
+        levelUpMessage();
+        level += 1;
+        hp += getHealthIncreasePerLv();
+        attackDamage += getAttackDamageIncreasePerLv();
+        defense += getDefenseIncreasePerLv();
+    }
+
+    public abstract int getDefenseIncreasePerLv();
+
+    public abstract int getAttackDamageIncreasePerLv();
+
+    public abstract int getHealthIncreasePerLv();
+
+    public abstract void levelUpMessage();
 
 
     // getter
@@ -77,7 +100,6 @@ public abstract class Champion {
     public String getName() {
         return name;
     }
-
 
     public int getHp() {
         return hp;
@@ -93,6 +115,21 @@ public abstract class Champion {
 
     public int getDefense() {
         return defense;
+    }
+
+
+    // toString
+
+    @Override
+    public String toString() {
+        return "Champion{" +
+                "name='" + name + '\'' +
+                ", level=" + level +
+                ", hp=" + hp +
+                ", attackDamage=" + attackDamage +
+                ", criticalRate=" + criticalRate +
+                ", defense=" + defense +
+                '}';
     }
 
 
