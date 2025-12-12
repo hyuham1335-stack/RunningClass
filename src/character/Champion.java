@@ -1,5 +1,7 @@
 package character;
 
+import constants.GameConstants;
+
 import java.util.Random;
 
 public abstract class Champion {
@@ -88,6 +90,8 @@ public abstract class Champion {
         if (hp <= 0) {
             System.out.println(myName + " 사망!");
             hp = 0;
+            resurrect();
+            System.out.println(name + " 부활! " + name + " 현재 체력:" + hp);
         } else {
             System.out.println(myName + "의 체력이 " + hp + " 남았습니다.");
         }
@@ -112,6 +116,13 @@ public abstract class Champion {
     public abstract int getHealthIncreasePerLv();
 
     public abstract void levelUpMessage();
+
+
+    // 부활 기능
+
+    public final void resurrect() {
+        this.hp = (int)(GameConstants.baseHp * 0.2);
+    }
 
 
     // getter

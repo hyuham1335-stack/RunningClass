@@ -19,7 +19,6 @@ public class Main {
         garen.useQ(teemo);
         teemo.useQ(garen);
 
-
         if(garen instanceof Melee melee)
         {
             melee.dash(teemo);
