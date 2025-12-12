@@ -3,6 +3,9 @@ package character;
 import constants.GameConstants;
 import exception.BattleActionEndException;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public abstract class Champion {
@@ -38,17 +41,19 @@ public abstract class Champion {
         battleCount++;
 
         if (hp <= 0) {
-            System.out.println("캐릭터가 사망한 상태입니다.");
+            Logger.log("캐릭터가 사망한 상태입니다.");
             return;
         }
 
-        System.out.println(name + "가 " + enemy.getName() + "에게 기본 공격!");
+        Logger.log(name + "가 " + enemy.getName() + "에게 기본 공격!");
         Random rand = new Random();
         rand.setSeed(System.currentTimeMillis());
         int value = rand.nextInt(100);
 
         int criticalCheck = (value > criticalRate) ? 1 : 2;
-        if(criticalCheck == 2) System.out.println("Critical 발생!");
+        if(criticalCheck == 2) {
+            Logger.log("Critical 발생!");
+        }
 
         int myDamage = attackDamage * criticalCheck;
         enemy.takeDamage(this, myDamage);
@@ -87,15 +92,15 @@ public abstract class Champion {
         int trueDamage = Math.max(0, damage - defense);
         hp -= trueDamage;
 
-        System.out.println(enemyName + "이(가) " + myName + "에게 " + trueDamage + " 피해를 주었습니다.");
+        Logger.log(enemyName + "이(가) " + myName + "에게 " + trueDamage + " 피해를 주었습니다.");
+
 
         if (hp <= 0) {
-            System.out.println(myName + " 사망!");
+            Logger.log(myName + " 사망!");
             hp = 0;
             resurrect();
-            System.out.println(name + " 부활! " + name + " 현재 체력:" + hp);
         } else {
-            System.out.println(myName + "의 체력이 " + hp + " 남았습니다.");
+            Logger.log(myName + "의 체력이 " + hp + " 남았습니다.");
         }
     }
 
@@ -126,8 +131,10 @@ public abstract class Champion {
         deathCount += 1;
         if(resurrectCheck()) {
             this.hp = (int)(GameConstants.baseHp * 0.2);
+            Logger.log(name + " 부활! " + name + " 현재 체력:" + hp);
         } else {
-            throw new BattleActionEndException(name + " 이(가) 더 이상 부활할 수 없어 전투를 종료합니다.");
+            Logger.log(name + " 이(가) 더 이상 부활할 수 없어 전투를 종료합니다.");
+            throw new BattleActionEndException();
         }
     }
 
@@ -174,5 +181,19 @@ public abstract class Champion {
                 '}';
     }
 
+    // 로그 처리 내부 중첩 클래스
+    public static class Logger {
+        private static final List<String> logList = new ArrayList<>();
+
+        public static void log(String message) {
+            logList.add(message);
+            System.out.println(message);
+        }
+
+        // 수정 불가능하게 불변 객체로 반환
+        public static List<String> getLogList() {
+            return Collections.unmodifiableList(logList);
+        }
+    }
 
 }

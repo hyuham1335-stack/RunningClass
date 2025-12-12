@@ -65,7 +65,7 @@ public class Ashe extends Champion implements Ranged {
     @Override
     public void kite(Champion champ) {
         battleCount++;
-        System.out.println("애쉬의 카이팅 스킬 사용");
+        Logger.log("애쉬의 카이팅 스킬 사용");
         champ.takeDamage(this, getAttackDamage() * 2);
     }
 

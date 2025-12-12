@@ -48,11 +48,12 @@ public class Main {
             teemo.useR(garen);
 
         } catch(BattleActionEndException e) {
-            System.out.println(e.getMessage());
             System.out.println("======= 전투 종료 =======");
             System.out.println(garen);
             System.out.println(teemo);
             System.out.println("총 전투 횟수 : " + Champion.battleCount);
         }
+
+        System.out.println(Champion.Logger.getLogList());
     }
 }

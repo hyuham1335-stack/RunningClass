@@ -65,14 +65,14 @@ public class Teemo extends Champion implements Mage, Ranged {
     @Override
     public void magicAttack(Champion champ) {
         battleCount++;
-        System.out.println("티모의 마법스킬 사용");
+        Logger.log("티모의 마법스킬 사용");
         champ.takeDamage(this, getAttackDamage() + 50);
     }
 
     @Override
     public void kite(Champion champ) {
         battleCount++;
-        System.out.println("티모의 카이팅 스킬 사용");
+        Logger.log("티모의 카이팅 스킬 사용");
         champ.takeDamage(this, getAttackDamage() * 2);
     }
 
