@@ -64,6 +64,12 @@ public class Garen extends Champion implements Melee {
     }
 
     @Override
+    public void resurrectBuff() {
+        adjDefense(10);
+        Logger.log(getName() + " 방어력 10 증가");
+    }
+
+    @Override
     public void dash(Champion champ) {
         battleCount++;
         Logger.log("가렌의 돌진 사용");

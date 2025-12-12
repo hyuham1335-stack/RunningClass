@@ -62,6 +62,12 @@ public class Lux extends Champion implements Mage {
     }
 
     @Override
+    public void resurrectBuff() {
+        adjAttackDamage(15);
+        Logger.log(getName() + " 공격력 15 증가");
+    }
+
+    @Override
     public void magicAttack(Champion champ) {
         battleCount++;
         Logger.log("럭스의 마법스킬 사용");

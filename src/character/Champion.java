@@ -59,6 +59,7 @@ public abstract class Champion {
         enemy.takeDamage(this, myDamage);
     }
 
+    // 템플릿 패턴 활용
     public final void useQ(Champion enemy) {
         doUseQ(enemy);
         battleCount++;
@@ -132,13 +133,40 @@ public abstract class Champion {
         if(resurrectCheck()) {
             this.hp = (int)(GameConstants.baseHp * 0.2);
             Logger.log(name + " 부활! " + name + " 현재 체력:" + hp);
+            Logger.log(name + " 부활 버프 획득! ");
+            resurrectBuff();
         } else {
             Logger.log(name + " 이(가) 더 이상 부활할 수 없어 전투를 종료합니다.");
             throw new BattleActionEndException();
         }
     }
 
+    // 부활이 가능한지 확인하는 메서드
     public abstract boolean resurrectCheck();
+
+    // 부활 시 효과 관련 메서드
+    public abstract void resurrectBuff();
+
+
+    // 능력치 조정 메서드
+
+    public void adjHp(int changeAmount){
+        if(changeAmount + hp > 0){
+            hp += changeAmount;
+        }
+    }
+
+    public void adjAttackDamage(int changeAmount){
+        if(changeAmount + attackDamage > 0){
+            attackDamage += changeAmount;
+        }
+    }
+
+    public void adjDefense(int changeAmount){
+        if(changeAmount + defense > 0){
+            defense += changeAmount;
+        }
+    }
 
 
     // getter
