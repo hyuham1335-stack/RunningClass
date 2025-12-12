@@ -2,6 +2,7 @@ import character.Ashe;
 import character.Champion;
 import character.Garen;
 import character.Teemo;
+import constants.GameConstants;
 import rolegroup.Mage;
 import rolegroup.Melee;
 import rolegroup.Ranged;
@@ -9,8 +10,8 @@ import rolegroup.Ranged;
 public class Main {
     public static void main(String[] args) {
 
-        Champion garen = new Garen("김가렌", 1, 600, 70, 25, 30);
-        Champion teemo = new Teemo("김티모", 1, 500, 80, 40, 20);
+        Champion garen = new Garen("김가렌", 1, GameConstants.baseHp, GameConstants.baseAttackDamage, 25, GameConstants.baseDefense);
+        Champion teemo = new Teemo("김티모", 1, GameConstants.baseHp, GameConstants.baseAttackDamage, 40, GameConstants.baseDefense);
 
         garen.levelUp();
         teemo.levelUp();
