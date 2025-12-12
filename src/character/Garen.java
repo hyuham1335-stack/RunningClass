@@ -53,6 +53,16 @@ public class Garen extends Champion implements Melee {
         System.out.println("가렌 레벨 업!");
     }
 
+    // 가렌 부활 가능횟수 = 0 회
+    @Override
+    public boolean resurrectCheck() {
+        if(this.getDeathCount() >= 1){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     public void dash(Champion champ) {
         battleCount++;

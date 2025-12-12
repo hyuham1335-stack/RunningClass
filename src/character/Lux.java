@@ -51,6 +51,16 @@ public class Lux extends Champion implements Mage {
         System.out.println("럭스 레벨 업!");
     }
 
+    // 럭스 부활 가능횟수 = 0 회
+    @Override
+    public boolean resurrectCheck() {
+        if(this.getDeathCount() >= 1){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     public void magicAttack(Champion champ) {
         battleCount++;

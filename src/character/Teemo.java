@@ -52,6 +52,16 @@ public class Teemo extends Champion implements Mage, Ranged {
         System.out.println("티모 레벨 업!");
     }
 
+    // 티모 부활 가능횟수 = 1 회
+    @Override
+    public boolean resurrectCheck() {
+        if(this.getDeathCount() >= 2){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     public void magicAttack(Champion champ) {
         battleCount++;

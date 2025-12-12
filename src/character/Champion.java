@@ -1,6 +1,7 @@
 package character;
 
 import constants.GameConstants;
+import exception.BattleActionEndException;
 
 import java.util.Random;
 
@@ -13,6 +14,7 @@ public abstract class Champion {
     private double criticalRate;
     private int defense;
     public static int battleCount;
+    private int deathCount;
 
     // 생성자
     public Champion(String name, int level, int hp, int attackDamage, int criticalRate, int defense )
@@ -121,8 +123,15 @@ public abstract class Champion {
     // 부활 기능
 
     public final void resurrect() {
-        this.hp = (int)(GameConstants.baseHp * 0.2);
+        deathCount += 1;
+        if(resurrectCheck()) {
+            this.hp = (int)(GameConstants.baseHp * 0.2);
+        } else {
+            throw new BattleActionEndException(name + " 이(가) 더 이상 부활할 수 없어 전투를 종료합니다.");
+        }
     }
+
+    public abstract boolean resurrectCheck();
 
 
     // getter
@@ -147,6 +156,9 @@ public abstract class Champion {
         return defense;
     }
 
+    public int getDeathCount() {
+        return deathCount;
+    }
 
     // toString
 

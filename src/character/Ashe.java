@@ -52,6 +52,16 @@ public class Ashe extends Champion implements Ranged {
         System.out.println("애쉬 레벨 업!");
     }
 
+    //애쉬 부활 가능 횟수 1회
+    @Override
+    public boolean resurrectCheck() {
+        if(this.getDeathCount() >= 2){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     public void kite(Champion champ) {
         battleCount++;
