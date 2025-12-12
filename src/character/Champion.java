@@ -10,7 +10,7 @@ public abstract class Champion {
     private int attackDamage;
     private double criticalRate;
     private int defense;
-
+    public static int battleCount;
 
     // 생성자
     public Champion(String name, int level, int hp, int attackDamage, int criticalRate, int defense )
@@ -31,6 +31,8 @@ public abstract class Champion {
 
     public void basicAttack(Champion enemy)
     {
+        battleCount++;
+
         if (hp <= 0) {
             System.out.println("캐릭터가 사망한 상태입니다.");
             return;
@@ -48,10 +50,27 @@ public abstract class Champion {
         enemy.takeDamage(this, myDamage);
     }
 
-    public abstract void useQ(Champion enemy);
-    public abstract void useW(Champion enemy);
-    public abstract void useE(Champion enemy);
-    public abstract void useR(Champion enemy);
+    public final void useQ(Champion enemy) {
+        doUseQ(enemy);
+        battleCount++;
+    }
+    public final void useW(Champion enemy) {
+        doUseW(enemy);
+        battleCount++;
+    };
+    public final void useE(Champion enemy) {
+        doUseE(enemy);
+        battleCount++;
+    }
+    public final void useR(Champion enemy){
+        doUseR(enemy);
+        battleCount++;
+    }
+
+    public abstract void doUseQ(Champion enemy);
+    public abstract void doUseW(Champion enemy);
+    public abstract void doUseE(Champion enemy);
+    public abstract void doUseR(Champion enemy);
 
 
     //피해처리

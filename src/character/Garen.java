@@ -9,25 +9,25 @@ public class Garen extends Champion implements Melee {
     }
 
     @Override
-    public void useQ(Champion enemy) {
+    public void doUseQ(Champion enemy) {
         System.out.println("가렌의 Q스킬 사용");
         enemy.takeDamage(this, getAttackDamage() + 50);
     }
 
     @Override
-    public void useW(Champion enemy) {
+    public void doUseW(Champion enemy) {
         System.out.println("가렌의 W스킬 사용");
         enemy.takeDamage(this, getAttackDamage() + 30);
     }
 
     @Override
-    public void useE(Champion enemy) {
+    public void doUseE(Champion enemy) {
         System.out.println("가렌의 E스킬 사용");
         enemy.takeDamage(this, getAttackDamage() + 40);
     }
 
     @Override
-    public void useR(Champion enemy) {
+    public void doUseR(Champion enemy) {
         System.out.println("가렌의 R스킬 사용");
         enemy.takeDamage(this, getAttackDamage() + 100);
     }
@@ -55,6 +55,7 @@ public class Garen extends Champion implements Melee {
 
     @Override
     public void dash(Champion champ) {
+        battleCount++;
         System.out.println("가렌의 돌진 사용");
         champ.takeDamage(this, getAttackDamage() + 50);
     }

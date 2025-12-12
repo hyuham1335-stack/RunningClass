@@ -8,25 +8,25 @@ public class Lux extends Champion implements Mage {
     }
 
     @Override
-    public void useQ(Champion enemy) {
+    public void doUseQ(Champion enemy) {
         System.out.println("럭스의 Q스킬 사용");
         enemy.takeDamage(this, getAttackDamage() + 50);
     }
 
     @Override
-    public void useW(Champion enemy) {
+    public void doUseW(Champion enemy) {
         System.out.println("럭스의 W스킬 사용");
         enemy.takeDamage(this, getAttackDamage() + 40);
     }
 
     @Override
-    public void useE(Champion enemy) {
+    public void doUseE(Champion enemy) {
         System.out.println("럭스의 E스킬 사용");
         enemy.takeDamage(this, getAttackDamage() + 60);
     }
 
     @Override
-    public void useR(Champion enemy) {
+    public void doUseR(Champion enemy) {
         System.out.println("럭스의 R스킬 사용");
         enemy.takeDamage(this, getAttackDamage() + 200);
     }
@@ -53,6 +53,7 @@ public class Lux extends Champion implements Mage {
 
     @Override
     public void magicAttack(Champion champ) {
+        battleCount++;
         System.out.println("럭스의 마법스킬 사용");
         champ.takeDamage(this, getAttackDamage() + 50);
     }
